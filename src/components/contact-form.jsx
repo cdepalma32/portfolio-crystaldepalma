@@ -7,43 +7,51 @@ import { Textarea } from "@/components/ui/textarea"
 import { Send } from "lucide-react"
 
 export default function ContactForm() {
-  // State for form data
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-
-  // States to track form submission status
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  // Initial form state
+  const initialState = { name: "", email: "", subject: "", message: "" };
+  const [formData, setFormData] = useState(initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Handler for input changes
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Handler for form submission
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-    // Simulate form submission with a delay
-    // In a real application, this would be replaced with an API call
-    setTimeout(() => {
-      console.log("Form submitted:", formData)
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      setFormData({ name: "", email: "", subject: "", message: "" })
+    try {
+      const response = await fetch("http://localhost:5000/send-email", { 
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
-    }, 1500)
-  }
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSubmitted(true);
+        setFormData(initialState);
+
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        console.error("Server response:", result);
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error connecting to the server:", error);
+      alert("Error sending message. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+    
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -61,6 +69,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
+            autoComplete="off" // prevents autofill
             className="bg-white rounded-lg border-gray-200 focus:border-emerald-500 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="Your name"
           />
@@ -77,6 +86,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
+            autoComplete="off"
             className="bg-white rounded-lg border-gray-200 focus:border-emerald-500 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             placeholder="your.email@example.com"
           />
@@ -95,6 +105,7 @@ export default function ContactForm() {
           value={formData.subject}
           onChange={handleChange}
           required
+          autoComplete="off"
           className="bg-white rounded-lg border-gray-200 focus:border-emerald-500 focus-visible:outline-0 focus-visible:ring-0 focus-visible:ring-offset-0"
           placeholder="How can I help you?"
         />
@@ -166,5 +177,4 @@ export default function ContactForm() {
       </div>
     </form>
   )
-}
-
+            }

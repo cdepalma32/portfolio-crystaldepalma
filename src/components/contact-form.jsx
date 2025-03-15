@@ -24,6 +24,8 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    console.log("Connected to backend - Sending email request");
+
     try {
       const response = await fetch("https://portfolio-crystaldepalma.onrender.com/send-email", {
         method: "POST",

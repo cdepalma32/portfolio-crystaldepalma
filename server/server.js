@@ -29,7 +29,15 @@ transporter.verify((error, success) => {
 
 // Contact form endpoint (using the correct transporter)
 app.post('/send-email', async (req, res) => {
+
+    console.log("Incoming request:", req.body); // log request data
+
     const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !subject || !message) {
+      console.error("❌ Missing required fields:", req.body);
+      return res.status(400).json({ success: false, message: "All fields are required." });
+  }
 
     let mailOptions = {
         from: process.env.EMAIL_USER,  // Use your own email here

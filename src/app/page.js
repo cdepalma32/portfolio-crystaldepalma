@@ -1,3 +1,4 @@
+import { useEffect } from "react"; 
 import Image from "next/image"
 import { Mail, MapPin, Phone, ArrowRight, Github, Linkedin } from "lucide-react"
 import ProjectCard from "@/components/project-card"
@@ -6,7 +7,16 @@ import ContactForm from "@/components/contact-form"
 import { Button } from "@/components/ui/button"
 import Navbar from "@/components/navbar"
 
+
 export default function Home() {
+
+    // ✅ Force page reload if coming from Google Docs PDF link
+    useEffect(() => {
+      if (document.referrer.includes("docs.google.com")) {
+        window.location.href = window.location.href; // Reload page to fix image loading
+      }
+    }, []);
+    
   return (
     <main className="min-h-screen bg-white">
       {/* 
@@ -28,7 +38,8 @@ export default function Home() {
       <section className="relative h-screen flex justify-center">
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
-        <Image src="/main-bg.jpg" alt="Background" fill className="object-cover" priority />
+        <img src="/main-bg.jpg" alt="Background" className="absolute inset-0 w-full h-full object-cover" />
+
           {/* Gradient overlay to improve text readability */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/40 to-black/50"></div>
         </div>

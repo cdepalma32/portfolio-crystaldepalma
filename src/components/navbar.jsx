@@ -112,9 +112,9 @@ export default function Navbar() {
 
             {/*  Fix Resume Link */}
             <a
-              href={`${process.env.NEXT_PUBLIC_SITE_URL}/resume/crystal-depalma-resume.pdf`}
+              href="/resume/resume.pdf"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={`px-4 py-2 transition-colors ${
                 scrolled
                   ? "text-gray-800 hover:text-emerald-600"

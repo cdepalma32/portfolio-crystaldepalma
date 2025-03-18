@@ -16,7 +16,7 @@ export default function Home() {
         window.location.href = window.location.href; // Reload page to fix image loading
       }
     }, []);
-    
+
   return (
     <main className="min-h-screen bg-white">
       {/* 
@@ -176,7 +176,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Resume download button */}
-              <a href="/resume/crystal-depalma-resume.pdf" target="_blank" rel="noreferrer">
+              <a href="/resume/resume.pdf" target="_blank" rel="noreferrer">
                 <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white">
                   Download Resume <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

@@ -112,7 +112,7 @@ export default function Navbar() {
 
             {/*  Fix Resume Link */}
             <a
-              href="/resume/crystal-depalma-resume.pdf"
+              href={`${process.env.NEXT_PUBLIC_SITE_URL}/resume/crystal-depalma-resume.pdf`}
               target="_blank"
               rel="noreferrer"
               className={`px-4 py-2 transition-colors ${

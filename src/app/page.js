@@ -13,6 +13,8 @@ export default function Home() {
 
     // ✅ Force page reload if coming from Google Docs PDF link
     useEffect(() => {
+      console.log("Force Vercel redeployment"); // log to trigger redeployment
+      
       if (document.referrer.includes("docs.google.com")) {
         window.location.href = window.location.href; // Reload page to fix image loading
       }

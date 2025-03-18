@@ -120,7 +120,10 @@ export default function Navbar() {
                   ? "text-gray-800 hover:text-emerald-600"
                   : "text-white hover:text-emerald-400"
               }`}
-              onClick={closeMenu}
+              onClick={(e) => {
+                console.log("Clicked resume link:", e.target.href);
+                closeMenu();
+              }}
             >
               My resume
             </a>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"; // Import link from Next.js
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 
@@ -82,31 +83,42 @@ export default function Navbar() {
               : "bg-black/90 backdrop-blur-md border-emerald-500/30"
           }`}
         >
-          <nav className="flex flex-col space-y-4 py-2">
-            <a
-              href="#work"
+           <nav className="flex flex-col space-y-4 py-2">
+            {/*  Updated Portfolio Link - Uses Next.js <Link> */}
+            <Link
+              href="/portfolio"
               className={`px-4 py-2 transition-colors ${
-                scrolled ? "text-gray-800 hover:text-emerald-600" : "text-white hover:text-emerald-400"
+                scrolled
+                  ? "text-gray-800 hover:text-emerald-600"
+                  : "text-white hover:text-emerald-400"
               }`}
               onClick={closeMenu}
             >
               Projects
-            </a>
+            </Link>
+
+            {/* Contact Me (same page) */}
             <a
               href="#contact"
               className={`px-4 py-2 transition-colors ${
-                scrolled ? "text-gray-800 hover:text-emerald-600" : "text-white hover:text-emerald-400"
+                scrolled
+                  ? "text-gray-800 hover:text-emerald-600"
+                  : "text-white hover:text-emerald-400"
               }`}
               onClick={closeMenu}
             >
               Contact me
             </a>
+
+            {/*  Fix Resume Link */}
             <a
               href="/resume/crystal-depalma-resume.pdf"
               target="_blank"
               rel="noreferrer"
               className={`px-4 py-2 transition-colors ${
-                scrolled ? "text-gray-800 hover:text-emerald-600" : "text-white hover:text-emerald-400"
+                scrolled
+                  ? "text-gray-800 hover:text-emerald-600"
+                  : "text-white hover:text-emerald-400"
               }`}
               onClick={closeMenu}
             >
@@ -116,6 +128,5 @@ export default function Navbar() {
         </div>
       )}
     </nav>
-  )
+  );
 }
-

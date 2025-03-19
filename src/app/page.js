@@ -40,12 +40,11 @@ export default function Home() {
       <section className="relative h-screen flex justify-center">
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
-        <Image src="/main-bg.jpg"
-          alt="Background"
-          layout="fill"
-          objectFit="cover"
-          priority
+        <img src="/main-bg.jpg" 
+        alt="Background" 
+        className="absolute inset-0 w-full h-full object-cover" 
         />
+
           {/* Gradient overlay to improve text readability */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/40 to-black/50"></div>
         </div>
